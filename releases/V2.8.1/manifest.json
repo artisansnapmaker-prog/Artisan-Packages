@@ -14,9 +14,9 @@
       "pullRequest": "https://github.com/artisansnapmaker-prog/Snapmaker-Artisan-Screen-App/pull/1"
     },
     "firmware": {
-      "repository": "https://github.com/artisansnapmaker-prog/Artisan-Marlin-fw",
+      "repository": "https://github.com/artisansnapmaker-prog/Artisan-Controller",
       "commit": "4799d72910776e7664ef6a01c9f4a3f64473f85a",
-      "pullRequest": "https://github.com/artisansnapmaker-prog/Artisan-Marlin-fw/pull/2"
+      "sourceBranch": "https://github.com/artisansnapmaker-prog/Artisan-Controller/tree/legacy/v2.8.1-imported-source"
     }
   },
   "artifacts": [

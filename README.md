@@ -17,7 +17,7 @@ Community-built Snapmaker Artisan update packages and the reproducible builder u
 
 The complete machine-readable metadata is in [`releases/V2.8.2/manifest.json`](releases/V2.8.2/manifest.json). The outer package release and controller use independent version schemes: V2.8.2 identifies the combined HMI package, while the official controller source reports `V2.3.4-0624` and its OTA image is `V2.3.4`.
 
-The previous [V2.8.1 prerelease](https://github.com/artisansnapmaker-prog/Artisan-Packages/releases/tag/V2.8.1) remains available as a historical build.
+The previous [V2.8.1 prerelease](https://github.com/artisansnapmaker-prog/Artisan-Packages/releases/tag/V2.8.1) remains available as a historical build. Its exact imported source is preserved on the controller repository's [`legacy/v2.8.1-imported-source`](https://github.com/artisansnapmaker-prog/Artisan-Controller/tree/legacy/v2.8.1-imported-source) branch.
 
 ## Install the combined package
 

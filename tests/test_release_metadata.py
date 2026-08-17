@@ -34,6 +34,15 @@ class ReleaseMetadataTest(unittest.TestCase):
             self.assertGreater(artifact["size"], 0)
             self.assertTrue(re.fullmatch(r"[0-9A-F]{64}", artifact["sha256"]))
 
+    def test_retired_repository_is_not_referenced(self):
+        checked_paths = [
+            self.repository / "README.md",
+            self.repository / "releases" / "V2.8.1" / "manifest.json",
+            self.repository / "releases" / "V2.8.2" / "manifest.json",
+        ]
+        for path in checked_paths:
+            self.assertNotIn("Artisan-Marlin-fw", path.read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()
