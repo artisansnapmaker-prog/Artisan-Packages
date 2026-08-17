@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 2,
+  "releaseVersion": "V2.8.2",
+  "packageVersion": "SM3_V2.8.2_20260817",
+  "releaseDate": "2026-08-17",
+  "components": {
+    "controllerRuntimeVersion": "V2.3.4-0624",
+    "controllerOtaVersion": "V2.3.4",
+    "screenVersion": "1.8.0"
+  },
+  "payloadTypes": {
+    "0": "main controller firmware",
+    "3": "Android screen application"
+  },
+  "sources": {
+    "screen": {
+      "repository": "https://github.com/artisansnapmaker-prog/Snapmaker-Artisan-Screen-App",
+      "commit": "335600cbc4463d5ad12414713ae938cb4d5d0bca",
+      "pullRequest": "https://github.com/artisansnapmaker-prog/Snapmaker-Artisan-Screen-App/pull/1"
+    },
+    "firmware": {
+      "repository": "https://github.com/artisansnapmaker-prog/Artisan-Controller",
+      "commit": "7c75d084ddc5a9728c3da2bad5c775e88782dd5c",
+      "pullRequest": "https://github.com/artisansnapmaker-prog/Artisan-Controller/pull/1",
+      "upstreamRepository": "https://github.com/Snapmaker/Artisan-Controller",
+      "upstreamCommit": "4b3f4fcfc5941244b71b83bdadd1a6ae873e79de"
+    }
+  },
+  "artifacts": [
+    {
+      "name": "SM3_V2.8.2_20260817.bin",
+      "kind": "combined-update",
+      "size": 155432810,
+      "sha256": "FFA7BC84A3F0D8FACA16F6B25B019A52F347E35557FE85C6DF6595AFFEE44389"
+    },
+    {
+      "name": "A400_MC_V2.3.4_20260817.bin",
+      "kind": "controller-firmware",
+      "size": 386960,
+      "sha256": "19E73E2084D252ED64607A77167B2BA4BD1AD13FF0B5383F686606AD0FD33EFE"
+    },
+    {
+      "name": "fabscreen-a400_1.8.0_orca-thumbnail-dashboard_armeabi-v7a_platform-signed.apk",
+      "kind": "screen-application",
+      "size": 155045793,
+      "sha256": "DF4B9B77BCE3FBD9798A7AA87D44A19DA3337230A0A7A26625826DB68B4A5FAD",
+      "certificateSha256": "C8A2E9BCCF597C2FB6DC66BEE293FC13F2FC47EC77BC6B2B0D52C11F51192AB8"
+    }
+  ]
+}

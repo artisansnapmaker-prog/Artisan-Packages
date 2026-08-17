@@ -15,10 +15,63 @@ TYPE_MAIN_CONTROLLER = 0
 TYPE_SCREEN_APP = 3
 BASE_HEADER_SIZE = 39
 ENTRY_SIZE = 9
+CONTROLLER_HEADER_SIZE = 256
+CONTROLLER_MAGIC = b"snapmaker update.bin\0"
+A400_CONTROLLER_PACKET_TYPE = 0x0002
+A400_APPLICATION_ADDRESS = 0x08010000
 
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest().upper()
+
+
+def snapmaker_checksum(data: bytes) -> int:
+    checksum = sum(
+        (data[index] << 8) | data[index + 1]
+        for index in range(0, len(data) - 1, 2)
+    )
+    if len(data) % 2:
+        checksum += data[-1]
+    return (~checksum) & 0xFFFFFFFF
+
+
+def controller_version(controller: bytes) -> str:
+    if len(controller) < CONTROLLER_HEADER_SIZE:
+        raise ValueError("controller image is shorter than its 256-byte header")
+    if not controller.startswith(CONTROLLER_MAGIC):
+        raise ValueError("not a packaged Snapmaker controller image")
+
+    protocol_version = controller[21]
+    packet_type = struct.unpack_from("<H", controller, 22)[0]
+    run_address = struct.unpack_from("<I", controller, 91)[0]
+    if protocol_version != 1:
+        raise ValueError(f"unsupported controller protocol version {protocol_version}")
+    if packet_type != A400_CONTROLLER_PACKET_TYPE:
+        raise ValueError(f"expected A400 controller packet type 2, found {packet_type}")
+    if run_address != A400_APPLICATION_ADDRESS:
+        raise ValueError(f"unexpected controller run address 0x{run_address:08X}")
+
+    try:
+        version = controller[29:61].split(b"\0", 1)[0].decode("ascii")
+    except UnicodeDecodeError as error:
+        raise ValueError("controller version is not ASCII") from error
+    if not re.fullmatch(r"V\d+\.\d+\.\d+", version):
+        raise ValueError(f"invalid controller version {version!r}")
+
+    payload = controller[CONTROLLER_HEADER_SIZE:]
+    declared_size = struct.unpack_from("<I", controller, 83)[0]
+    declared_checksum = struct.unpack_from("<I", controller, 87)[0]
+    declared_header_checksum = struct.unpack_from("<I", controller, 97)[0]
+    if declared_size != len(payload):
+        raise ValueError(
+            f"controller payload size mismatch: header={declared_size}, actual={len(payload)}"
+        )
+    if declared_checksum != snapmaker_checksum(payload):
+        raise ValueError("controller payload checksum mismatch")
+    if declared_header_checksum != snapmaker_checksum(controller[:97]):
+        raise ValueError("controller header checksum mismatch")
+
+    return version
 
 
 def package_version(version: str, date: str) -> str:
@@ -40,8 +93,10 @@ def build(controller_path: Path, screen_path: Path, output_path: Path, version: 
     controller = controller_path.read_bytes()
     screen = screen_path.read_bytes()
 
-    if not controller.startswith(b"snapmaker update.bin"):
-        raise ValueError(f"not a packaged Snapmaker controller image: {controller_path}")
+    try:
+        controller_version(controller)
+    except ValueError as error:
+        raise ValueError(f"invalid controller image {controller_path}: {error}") from error
     if not screen.startswith(b"PK\x03\x04"):
         raise ValueError(f"not an APK/ZIP payload: {screen_path}")
 
@@ -100,6 +155,8 @@ def verify(output_path: Path, controller_path: Path, screen_path: Path) -> None:
     print(f"Version: {version}")
     print(f"Size: {len(package)}")
     print(f"SHA256: {sha256(package)}")
+    embedded_controller_version = controller_version(expected[TYPE_MAIN_CONTROLLER])
+    print(f"Controller version: {embedded_controller_version}")
     print(f"Controller SHA256: {sha256(expected[TYPE_MAIN_CONTROLLER])}")
     print(f"Screen APK SHA256: {sha256(expected[TYPE_SCREEN_APP])}")
     print("Payload types: 0=controller, 3=screen app")
