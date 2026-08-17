@@ -1,0 +1,19 @@
+# Binary update artifacts are published as GitHub Release assets, not Git blobs.
+app/*.apk
+firmware/*.bin
+combined/*.bin
+
+# Temporary package output.
+*.tmp
+
+# Python tooling.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Local editor and operating-system files.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

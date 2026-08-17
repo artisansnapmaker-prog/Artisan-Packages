@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "releaseVersion": "V2.8.1",
+  "packageVersion": "SM3_V2.8.1_20260817",
+  "releaseDate": "2026-08-17",
+  "payloadTypes": {
+    "0": "main controller firmware",
+    "3": "Android screen application"
+  },
+  "sources": {
+    "screen": {
+      "repository": "https://github.com/artisansnapmaker-prog/Snapmaker-Artisan-Screen-App",
+      "commit": "335600cbc4463d5ad12414713ae938cb4d5d0bca",
+      "pullRequest": "https://github.com/artisansnapmaker-prog/Snapmaker-Artisan-Screen-App/pull/1"
+    },
+    "firmware": {
+      "repository": "https://github.com/artisansnapmaker-prog/Artisan-Marlin-fw",
+      "commit": "4799d72910776e7664ef6a01c9f4a3f64473f85a",
+      "pullRequest": "https://github.com/artisansnapmaker-prog/Artisan-Marlin-fw/pull/2"
+    }
+  },
+  "artifacts": [
+    {
+      "name": "SM3_V2.8.1_20260817.bin",
+      "kind": "combined-update",
+      "size": 155432082,
+      "sha256": "FE93278875ECBED1C89B8150472ADDA95802A3B9FD157540290FAD6879A0B894"
+    },
+    {
+      "name": "A400_MC_V2.8.1_20260817.bin",
+      "kind": "controller-firmware",
+      "size": 386232,
+      "sha256": "9FDB4AA805202007FC0D50C02EB87F88DB1850E5B4688C999146A926ACA86401"
+    },
+    {
+      "name": "fabscreen-a400_1.8.0_orca-thumbnail-dashboard_armeabi-v7a_platform-signed.apk",
+      "kind": "screen-application",
+      "size": 155045793,
+      "sha256": "DF4B9B77BCE3FBD9798A7AA87D44A19DA3337230A0A7A26625826DB68B4A5FAD",
+      "certificateSha256": "C8A2E9BCCF597C2FB6DC66BEE293FC13F2FC47EC77BC6B2B0D52C11F51192AB8"
+    }
+  ]
+}
