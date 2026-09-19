@@ -7,21 +7,21 @@ Community-built Snapmaker Artisan update packages and the reproducible builder u
 
 ## Current release
 
-[V2.8.3](https://github.com/artisansnapmaker-prog/Artisan-Packages/releases/tag/V2.8.3) contains:
+[V2.8.4](https://github.com/artisansnapmaker-prog/Artisan-Packages/releases/tag/V2.8.4) contains:
 
 | Asset | Purpose | Size | SHA-256 |
 | --- | --- | ---: | --- |
-| `SM3_V2.8.3_20260915.bin` | Combined USB update: controller firmware and HMI application | 155,961,715 bytes | `402FBEB497BFD34AD40ADBF14D5E0FA81C897BD70DA346C24A880D5C039C902E` |
+| `SM3_V2.8.4_20260919.bin` | Combined USB update: controller firmware and HMI application | 162,277,759 bytes | `AD5EE07731E126FB67C499AFEAB36987C0B5343E54856B458D82EA6AFC6D7C93` |
 | `A400_MC_V2.3.4_20260817.bin` | Standalone Artisan controller image | 386,960 bytes | `19E73E2084D252ED64607A77167B2BA4BD1AD13FF0B5383F686606AD0FD33EFE` |
-| `fabscreen-a400_1.8.0_enhanced-dashboard_armeabi-v7a_platform-signed.apk` | Latest Artisan ARM HMI with the enhanced LAN dashboard and optimized G-code workflow | 155,574,698 bytes | `D9F3A9BAE5B63214A976D33D9671F618477C447AF0EABBCF8FFD6BA9BF58DCFC` |
+| `fabscreen-a400_1.8.0_camera-obico_armeabi-v7a_platform-signed.apk` | Latest Artisan ARM HMI with camera and Obico integration | 161,890,742 bytes | `B56FE17EB0C1BF1D310B5745341FB82EA622E4759F9AFF77BE8E2E32CFEA111F` |
 
-The complete machine-readable metadata is in [`releases/V2.8.3/manifest.json`](releases/V2.8.3/manifest.json). The outer package, Android app, and controller use independent version schemes: V2.8.3 identifies the combined update, the Android package remains version `1.8.0`, and the official controller source reports `V2.3.4-0624` with OTA image version `V2.3.4`. The controller image is byte-identical to V2.8.2; this release updates the screen application.
+The complete machine-readable metadata is in [`releases/V2.8.4/manifest.json`](releases/V2.8.4/manifest.json). The outer package, Android app, and controller use independent version schemes: V2.8.4 identifies the combined update, the Android package remains version `1.8.0`, and the official controller source reports `V2.3.4-0624` with OTA image version `V2.3.4`. The controller image is byte-identical to V2.8.3; this release updates the screen application.
 
-The previous [V2.8.2 release](https://github.com/artisansnapmaker-prog/Artisan-Packages/releases/tag/V2.8.2) remains available. Historical V2.8.1 controller source is preserved on the controller repository's [`legacy/v2.8.1-imported-source`](https://github.com/artisansnapmaker-prog/Artisan-Controller/tree/legacy/v2.8.1-imported-source) branch.
+The previous [V2.8.3 release](https://github.com/artisansnapmaker-prog/Artisan-Packages/releases/tag/V2.8.3) remains available. Historical V2.8.1 controller source is preserved on the controller repository's [`legacy/v2.8.1-imported-source`](https://github.com/artisansnapmaker-prog/Artisan-Controller/tree/legacy/v2.8.1-imported-source) branch.
 
 ## Install the combined package
 
-1. Download `SM3_V2.8.3_20260915.bin` from the V2.8.3 release.
+1. Download `SM3_V2.8.4_20260919.bin` from the V2.8.4 release.
 2. Verify its SHA-256 checksum against this repository.
 3. Copy the file to the root of a USB drive supported by the Artisan.
 4. Make sure the printer is idle and connect the USB drive.
@@ -40,9 +40,9 @@ Python 3.9 or newer is sufficient; there are no third-party dependencies.
 ```powershell
 python build_combined_package.py `
   --controller firmware/A400_MC_V2.3.4_20260817.bin `
-  --screen app/fabscreen-a400_1.8.0_enhanced-dashboard_armeabi-v7a_platform-signed.apk `
-  --version V2.8.3 `
-  --date 20260915
+  --screen app/fabscreen-a400_1.8.0_camera-obico_armeabi-v7a_platform-signed.apk `
+  --version V2.8.4 `
+  --date 20260919
 ```
 
 The builder validates the controller image and APK/ZIP formats, writes the major-image header, embeds both payloads, and then verifies every packaged byte against its input. APK signing is verified separately with Android's `apksigner` before publication.

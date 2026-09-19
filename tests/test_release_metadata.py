@@ -7,7 +7,7 @@ from pathlib import Path
 class ReleaseMetadataTest(unittest.TestCase):
     def setUp(self):
         self.repository = Path(__file__).resolve().parents[1]
-        manifest_path = self.repository / "releases" / "V2.8.3" / "manifest.json"
+        manifest_path = self.repository / "releases" / "V2.8.4" / "manifest.json"
         self.manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 
     def test_current_release_uses_artisan_controller_fork(self):
@@ -25,7 +25,7 @@ class ReleaseMetadataTest(unittest.TestCase):
 
     def test_component_versions_are_not_conflated(self):
         components = self.manifest["components"]
-        self.assertEqual("V2.8.3", self.manifest["releaseVersion"])
+        self.assertEqual("V2.8.4", self.manifest["releaseVersion"])
         self.assertEqual("V2.3.4-0624", components["controllerRuntimeVersion"])
         self.assertEqual("V2.3.4", components["controllerOtaVersion"])
 
@@ -36,20 +36,20 @@ class ReleaseMetadataTest(unittest.TestCase):
             screen["repository"],
         )
         self.assertEqual(
-            "f1f50ae8be2d75bc179287500bf8013b31d5bb04",
+            "36e44b5fbeccc900feaa617e661d593649edf3de",
             screen["commit"],
         )
         self.assertEqual(
-            "1dcc5f6e8255efbf975a35d3f36f4534ec02cfce",
+            "354a0afccabb3316b61a2553eae9456b34be4365",
             screen["tree"],
         )
 
     def test_artifact_metadata_is_well_formed(self):
         self.assertEqual(
             {
-                "SM3_V2.8.3_20260915.bin",
+                "SM3_V2.8.4_20260919.bin",
                 "A400_MC_V2.3.4_20260817.bin",
-                "fabscreen-a400_1.8.0_enhanced-dashboard_armeabi-v7a_platform-signed.apk",
+                "fabscreen-a400_1.8.0_camera-obico_armeabi-v7a_platform-signed.apk",
             },
             {artifact["name"] for artifact in self.manifest["artifacts"]},
         )
@@ -63,6 +63,7 @@ class ReleaseMetadataTest(unittest.TestCase):
             self.repository / "releases" / "V2.8.1" / "manifest.json",
             self.repository / "releases" / "V2.8.2" / "manifest.json",
             self.repository / "releases" / "V2.8.3" / "manifest.json",
+            self.repository / "releases" / "V2.8.4" / "manifest.json",
         ]
         for path in checked_paths:
             self.assertNotIn("Artisan-Marlin-fw", path.read_text(encoding="utf-8"))
