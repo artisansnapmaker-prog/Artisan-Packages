@@ -23,6 +23,9 @@ This release combines the unchanged Snapmaker Artisan V2.3.4 controller image wi
 - **Wireless alternative — direct MJPEG IP camera:** this avoids the H.264 decode-and-convert workload required by RTSP and can provide a more usable wireless live view. MJPEG consumes more network bandwidth than H.264 and cameras may provide weaker authentication options.
 - **Experimental — H.264 RTSP:** use only when low frame rates are acceptable. In testing, a Tapo C110 `stream2` at its native 1280×720 fell to roughly 1 FPS after the Artisan screen decoded H.264 and converted frames to JPEG. The camera's higher-resolution stream exceeded the screen decoder's practical capability. RTSP is therefore not recommended for smooth live monitoring or time-critical Obico failure detection on this hardware.
 
+> [!WARNING]
+> The Artisan's built-in USB ports can provide insufficient power for some USB cameras, which may cause intermittent disconnects or an unstable video feed. Use an externally powered USB hub—one with its own power adapter—between the Artisan and the camera if this occurs. A powered hub is recommended for reliable USB-camera operation.
+
 ## RTSP limitations
 
 - The limiting device is the Artisan Android screen computer, not the motion-controller MCU or Marlin firmware. FabScreen must decode the RTSP H.264 stream, capture frames, and convert them to JPEG on this constrained hardware.
