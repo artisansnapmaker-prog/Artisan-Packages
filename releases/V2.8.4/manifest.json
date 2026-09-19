@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 2,
+  "releaseVersion": "V2.8.4",
+  "packageVersion": "SM3_V2.8.4_20260919",
+  "releaseDate": "2026-09-19",
+  "components": {
+    "controllerRuntimeVersion": "V2.3.4-0624",
+    "controllerOtaVersion": "V2.3.4",
+    "screenVersion": "1.8.0",
+    "screenVersionCode": 1
+  },
+  "payloadTypes": {
+    "0": "main controller firmware",
+    "3": "Android screen application"
+  },
+  "sources": {
+    "screen": {
+      "repository": "https://github.com/artisansnapmaker-prog/Snapmaker-Artisan-Screen-App",
+      "commit": "36e44b5fbeccc900feaa617e661d593649edf3de",
+      "mainCommit": "978be5ada231349ab9f5acef25e3aa9be1562dce",
+      "tree": "354a0afccabb3316b61a2553eae9456b34be4365",
+      "branch": "https://github.com/artisansnapmaker-prog/Snapmaker-Artisan-Screen-App/tree/codex/camera-obico-integration"
+    },
+    "firmware": {
+      "repository": "https://github.com/artisansnapmaker-prog/Artisan-Controller",
+      "commit": "7c75d084ddc5a9728c3da2bad5c775e88782dd5c",
+      "pullRequest": "https://github.com/artisansnapmaker-prog/Artisan-Controller/pull/1",
+      "upstreamRepository": "https://github.com/Snapmaker/Artisan-Controller",
+      "upstreamCommit": "4b3f4fcfc5941244b71b83bdadd1a6ae873e79de"
+    }
+  },
+  "artifacts": [
+    {
+      "name": "SM3_V2.8.4_20260919.bin",
+      "kind": "combined-update",
+      "size": 162277759,
+      "sha256": "AD5EE07731E126FB67C499AFEAB36987C0B5343E54856B458D82EA6AFC6D7C93"
+    },
+    {
+      "name": "A400_MC_V2.3.4_20260817.bin",
+      "kind": "controller-firmware",
+      "size": 386960,
+      "sha256": "19E73E2084D252ED64607A77167B2BA4BD1AD13FF0B5383F686606AD0FD33EFE"
+    },
+    {
+      "name": "fabscreen-a400_1.8.0_camera-obico_armeabi-v7a_platform-signed.apk",
+      "kind": "screen-application",
+      "size": 161890742,
+      "sha256": "B56FE17EB0C1BF1D310B5745341FB82EA622E4759F9AFF77BE8E2E32CFEA111F",
+      "certificateSha256": "C8A2E9BCCF597C2FB6DC66BEE293FC13F2FC47EC77BC6B2B0D52C11F51192AB8"
+    }
+  ]
+}
